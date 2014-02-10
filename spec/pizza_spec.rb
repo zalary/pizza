@@ -4,6 +4,25 @@ describe Pizza do
   it "exists" do
     expect(Pizza).to be_a(Class)
   end
+
+   describe '.initialize' do
+    it 'defaults the toppings to cheese only, if the pizza has no toppings' do
+      pizza = Pizza.new
+
+      expect(pizza.toppings.size).to eq(1)
+      expect(pizza.toppings.first.name).to eq('cheese')
+  end
+
+    it 'records all of the toppings' do
+      toppings = [
+        Topping.new('mushrooms', vegetarian: true),
+        Topping.new('pepperoni')
+      ]
+      pizza = Pizza.new(toppings)
+
+      expect(pizza.toppings).to eq(toppings)
+    end
+  end
 end
 
 describe Topping do
