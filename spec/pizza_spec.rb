@@ -42,6 +42,5 @@ describe Topping do
 
       expect(topping.vegetarian).to eq(true)
     end
-
   end
 end
