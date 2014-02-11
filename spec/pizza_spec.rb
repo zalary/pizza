@@ -13,6 +13,25 @@ describe Pizza do
       expect(pizza.toppings.first.name).to eq('cheese')
   end
 
+  describe '.deliver!' do
+  it 'should have a time for delivery' do
+    pizza = Pizza.new
+    expect(pizza.delivery_time).to_not eq(nil)
+  end
+
+  it 'should show late if past 30 min' do
+    pizza = Pizza.new
+    @time_now = Time.parse("Feb 11 2014")
+   Time.stub(:now).and_return(@time_now)
+    expect(pizza.late?).to eq(true)
+  end
+
+  it 'should show not late if under 30 min' do
+    pizza = Pizza.new
+    expect(pizza.late?).to eq(false)
+  end
+ end
+
     it 'records all of the toppings' do
       toppings = [
         Topping.new('mushrooms', vegetarian: true),
@@ -42,7 +61,10 @@ describe '.add_topping' do
 
 expect(pizza.toppings.last.name).to eq('mushrooms')
   end
- end
+
+
+end
+
 end
 
 describe Topping do
